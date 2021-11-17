@@ -7,8 +7,8 @@ Comment.destroy_all
 
 
 puts "seeding users"
-user1 = User.create(name: "Cody", email: "cmchaff14@yahoo.com") 
-user2 = User.create(name: "Sowande", email: "swanDaBest@gamil.com")
+user1 = User.create(name: "Cody", email: "cmchaff14@yahoo.com", password: "password") 
+user2 = User.create(name: "Sowande", email: "swanDaBest@gamil.com", password: "password")
 puts"finished users"
 puts"seeding videos"
 video1 = Video.create(user_id: user1.id, url: "https://www.youtube.com/watch?v=OE0Lpy-ddxU", title: "MHW Iceborne | After you've killed 100 Alatreon", likes: 26000, description: "Thanks to Mzly for teaming up with us", veiws: 1944081)

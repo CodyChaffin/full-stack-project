@@ -32,9 +32,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @test.destroy
-  end
+  # def destroy
+  #   @test.destroy
+  # end
 
   private
 
