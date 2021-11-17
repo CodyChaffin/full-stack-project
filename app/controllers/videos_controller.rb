@@ -2,12 +2,19 @@ class VideosController < ApplicationController
           # GET /tests
   # GET /tests.json
   def index
-    @tests = Test.all
+    videos = Video.all
+    render json: videos, status: :ok
   end
 
   # GET /tests/1
   # GET /tests/1.json
   def show
+    video = Video.find_by(id: params[:id])
+    if video
+      render json: video, serializer:VideodetailsSerializer
+    else
+      render json: {error: "Video not found" }, status: :not_found
+    end
   end
 
   # POST /tests
@@ -49,4 +56,4 @@ class VideosController < ApplicationController
       params.require(:test).permit(:name, :age)
     end
 end
-end
+

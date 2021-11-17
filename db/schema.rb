@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_231359) do
+ActiveRecord::Schema.define(version: 2021_11_17_180823) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "video_id"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2021_11_16_231359) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
+    t.string "password_digest"
   end
 
   create_table "videos", force: :cascade do |t|

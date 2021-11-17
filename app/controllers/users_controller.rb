@@ -1,29 +1,29 @@
 class UsersController < ApplicationController
-          # GET /tests
-  # GET /tests.json
-  def index
-    @tests = Test.all
-  end
+  
 
   # GET /tests/1
   # GET /tests/1.json
   def show
+    if current_user
+      render json: current_user, status: :ok
+    else
+      render json: {error: 'no active session'}, status: :unauthorized
+    end
   end
 
   # POST /tests
   # POST /tests.json
   def create
-    @test = Test.new(test_params)
-
-    if @test.save
-      render :show, status: :created, location: @test
+    user = User.create(user_params)
+    if user.valid?
+      session[:user_id] = user.id
+      render json: user, status: :ok
     else
-      render json: @test.errors, status: :unprocessable_entity
+      render json: {error: user.errors}, status: :unprocessable_entity
     end
+
   end
 
-  # PATCH/PUT /tests/1
-  # PATCH/PUT /tests/1.json
   def update
     if @test.update(test_params)
       render :show, status: :ok, location: @test
@@ -32,21 +32,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /tests/1
-  # DELETE /tests/1.json
   def destroy
     @test.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_test
-      @test = Test.find(params[:id])
-    end
 
     # Only allow a list of trusted parameters through.
-    def test_params
-      params.require(:test).permit(:name, :age)
+    def user_params
+      params.permit(:name, :email, :password, :password_confirmation)
     end
 end
-end
+
