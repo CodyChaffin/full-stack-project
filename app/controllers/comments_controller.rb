@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
   # GET /tests.json
   def index
     @tests = Test.all
+    comment = Comments.all
+    render json: comment status: :ok
   end
 
   # GET /tests/1
@@ -13,13 +15,21 @@ class CommentsController < ApplicationController
   # POST /tests
   # POST /tests.json
   def create
-    @test = Test.new(test_params)
 
-    if @test.save
-      render :show, status: :created, location: @test
+    comment = Comments.create(comment_params)
+    if comment.valid?
+      render json: comment.video, status: :created
     else
-      render json: @test.errors, status: :unprocessable_entity
+      render json: {errors: "Some error here"}, status: :unprocessable_entity
     end
+  end
+    # @test = Test.new(test_params)
+
+    # if @test.save
+    #   render :show, status: :created, location: @test
+    # else
+    #   render json: @test.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /tests/1
@@ -35,7 +45,13 @@ class CommentsController < ApplicationController
   # DELETE /tests/1
   # DELETE /tests/1.json
   def destroy
-    @test.destroy
+    comments = Comment.fid_by(id: params[:id])
+      if comments
+        comments.destroy
+        head :no_content
+      else render json: {error: "Restaurant not found"}, status: :not_found
+      end
+    # @test.destroy
   end
 
   private
@@ -45,8 +61,8 @@ class CommentsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def test_params
-      params.require(:test).permit(:name, :age)
+    def comment_params
+      params.permit(:video_id, :user_id, :remark)
     end
 end
 
