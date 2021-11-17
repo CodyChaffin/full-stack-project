@@ -2,21 +2,21 @@ class CommentsController < ApplicationController
           # GET /tests
   # GET /tests.json
   def index
-    @tests = Test.all
-    comment = Comments.all
-    render json: comment status: :ok
+    # @tests = Test.all
+    comments = Comment.all
+    render json: comments, status: :ok
   end
 
   # GET /tests/1
   # GET /tests/1.json
-  def show
-  end
+  # def show
+  # end
 
   # POST /tests
   # POST /tests.json
   def create
 
-    comment = Comments.create(comment_params)
+    comment = Comment.create(comment_params)
     if comment.valid?
       render json: comment.video, status: :created
     else
@@ -30,40 +30,48 @@ class CommentsController < ApplicationController
     # else
     #   render json: @test.errors, status: :unprocessable_entity
     # end
-  end
+  # end
 
   # PATCH/PUT /tests/1
   # PATCH/PUT /tests/1.json
   def update
-    if @test.update(test_params)
-      render :show, status: :ok, location: @test
+    comments = Comment.find_by(id: params[:id])
+    if comments
+      comments.update(change_comment)
     else
-      render json: @test.errors, status: :unprocessable_entity
+      render json: {error: "Original Comment Not Found"}, status: :not_found
     end
+    # if @test.update(test_params)
+    #   render :show, status: :ok, location: @test
+    # else
+    #   render json: @test.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /tests/1
   # DELETE /tests/1.json
   def destroy
-    comments = Comment.fid_by(id: params[:id])
+    comments = Comment.find_by(id: params[:id])
       if comments
         comments.destroy
         head :no_content
-      else render json: {error: "Restaurant not found"}, status: :not_found
+      else render json: {error: "Comment not found"}, status: :not_found
       end
     # @test.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_test
-      @test = Test.find(params[:id])
+    # def set_test
+    #   @test = Test.find(params[:id])
+    # end
+    def change_comment
+      params.permit(:remark, :id)
     end
-
     # Only allow a list of trusted parameters through.
     def comment_params
       params.permit(:video_id, :user_id, :remark)
     end
 end
 
-end
+
