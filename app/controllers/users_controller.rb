@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :confirm_authentication
+  before_action :authorize_user, only: [:show, :create, :update, :destroy]
 
   # GET /tests/1
   # GET /tests/1.json
@@ -39,7 +40,11 @@ class UsersController < ApplicationController
 
   private
 
-  
+  def authorize_user
+    user_can_modify = @user.user_id == current_user.id
+    render json: { error: "You don't have permission to perform that action" }, status: :forbidden unless user_can_modify
+  end
+
 
     # Only allow a list of trusted parameters through.
     def user_params

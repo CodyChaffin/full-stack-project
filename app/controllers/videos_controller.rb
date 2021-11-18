@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :update, :destroy]
-  before_action :authorize_user, only: [:create :update, :destroy]
+  before_action :authorize_user, only: [:create, :update, :destroy]
 
   
           # GET /tests
@@ -33,6 +33,15 @@ class VideosController < ApplicationController
     end
   end
 
+  def destroy
+    videos = Video.find_by(id: params[:id])
+      if videos
+        videos.destroy
+        head :no_content
+      else render json: {error: "Video not found"}, status: :not_found
+      end
+    # @test.destroy
+  end
 #   {
 # "user_id": 4,
 # "url": "https://www.youtube.com/watch?v=N-RULFiOKvs",
@@ -52,17 +61,17 @@ class VideosController < ApplicationController
 
   # PATCH/PUT /tests/1
   # PATCH/PUT /tests/1.json
-  def update
-    if @test.update(test_params)
-      render :show, status: :ok, location: @test
-    else
-      render json: @test.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @test.update(test_params)
+  #     render :show, status: :ok, location: @test
+  #   else
+  #     render json: @test.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  def destroy(cancle_vid)
-    if video = Video
-  end
+  # def destroy(cancle_vid)
+  #   if video = Video
+  # end
 
   # DELETE /tests/1
   # DELETE /tests/1.json
