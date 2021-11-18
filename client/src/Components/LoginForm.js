@@ -1,8 +1,9 @@
 import { useState } from "react"
 
-function LoginForm(setCurrentUser){
+function LoginForm({setCurrentUser}){
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
+console.log(setCurrentUser)
     
 const handleSubmit = (e) => {
         e.preventDefault()
@@ -15,9 +16,11 @@ const handleSubmit = (e) => {
         })
           .then(res => {
             if (res.ok) {
-              res.json().then((user) => setCurrentUser(user))
+              res.json().then((user) => {
+                setCurrentUser(user)
+                // console.log(user)
                 // history.push('/')
-              
+              })
             } else {
               res.json().then(errors => {
                 console.error(errors)

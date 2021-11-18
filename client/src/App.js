@@ -1,10 +1,10 @@
 import LoginSigninPage from "./Components/unauthorizedPage";
-import mainPage from "./Components/authorizedPage";
+import MainPage from "./Components/authorizedPage";
 import React, { useState, useEffect } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  const [authChecked, setAuthChecked] = useState(null)
+  const [authChecked, setAuthChecked] = useState(false)
 
   useEffect(() => {
     fetch('/me', {
@@ -28,7 +28,7 @@ function App() {
     <>
     {/* // <Router> */}
       {currentUser ? (
-          <mainPage
+          <MainPage
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
           />

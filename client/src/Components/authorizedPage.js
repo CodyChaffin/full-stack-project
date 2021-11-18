@@ -1,9 +1,16 @@
+import VideoContainer from "./VideoContainer"
 
-function mainPage(){
+function MainPage({currentUser}){
+
+
+
     return (
-        <h1>your in</h1>
+        <>
+        <h1 style={{position: "fixed"}}>{currentUser.name}</h1>
+        <VideoContainer/>
+        </>
     )
 }
 
 
-export default mainPage
+export default MainPage
