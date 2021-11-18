@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :confirm_authentication
-  before_action :authorize_user, only: [:show, :create, :update, :destroy]
+  # skip_before_action :confirm_authentication
+  before_action :authorize_user, only: [ :create, :update, :destroy]
 
   # GET /tests/1
   # GET /tests/1.json
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:name, :email, :password, :password_confirmation)
+      params.permit(:id, :name, :email, :password, :password_confirmation)
     end
 end
 

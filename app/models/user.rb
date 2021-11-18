@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :videos dependant: :destroy
+    has_many :videos, dependent: :destroy
     has_many :comments, through: :videos
     has_secure_password
 
