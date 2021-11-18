@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  
+  skip_before_action :confirm_authentication
 
   # GET /tests/1
   # GET /tests/1.json
   def show
     if current_user
+      session[:user_id] = user.id
       render json: current_user, status: :ok
     else
       render json: {error: 'no active session'}, status: :unauthorized
@@ -24,19 +25,21 @@ class UsersController < ApplicationController
 
   end
 
-  def update
-    if @test.update(test_params)
-      render :show, status: :ok, location: @test
-    else
-      render json: @test.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @test.update(test_params)
+  #     render :show, status: :ok, location: @test
+  #   else
+  #     render json: @test.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # def destroy
   #   @test.destroy
   # end
 
   private
+
+  
 
     # Only allow a list of trusted parameters through.
     def user_params

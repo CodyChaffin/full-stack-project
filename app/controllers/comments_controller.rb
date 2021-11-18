@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authorize_user, only: [:update, :destroy]
           # GET /tests
   # GET /tests.json
   def index
@@ -15,7 +16,6 @@ class CommentsController < ApplicationController
   # POST /tests
   # POST /tests.json
   def create
-
     comment = Comment.create(comment_params)
     if comment.valid?
       render json: comment.video, status: :created
@@ -65,6 +65,14 @@ class CommentsController < ApplicationController
     # def set_test
     #   @test = Test.find(params[:id])
     # end
+
+
+    def authorize_user
+      user_can_modify = @comment.user_id == current_user.id
+      render json: { error: "You don't have permission to perform that action" }, status: :forbidden unless user_can_modify
+    end
+
+
     def change_comment
       params.permit(:remark, :id)
     end
@@ -74,4 +82,9 @@ class CommentsController < ApplicationController
     end
 end
 
+# {
+#     ":video_id": 3,
+#     "user_id": 4,
+#     "remark": "is this working"
+# }
 
