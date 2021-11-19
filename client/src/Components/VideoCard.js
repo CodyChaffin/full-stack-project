@@ -19,7 +19,7 @@ function VideoCard({vid, currentUser}){
         </div>
         <div className = "comCard">
             <AddCommentForm currentUser={currentUser} vid={vid} vidCom={vidCom} setVidCom={setVidCom} />
-        <ul style={{listStyle: "none"}}>{vidCom.map(comment=><li>{comment.remark} by {vid.user.name}  </li>)}</ul>
+        <ul style={{listStyle: "none"}}>{vidCom.map(comment=><li>{comment.remark}</li>)}</ul>
         
         
         </div>
