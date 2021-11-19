@@ -10,7 +10,7 @@ function MainPage({currentUser}){
     return (
         <>
         <button onClick={()=>navigate("/my-profile")}style={{position: "fixed"}}>{currentUser.name}</button>
-        <VideoContainer/>
+        <VideoContainer currentUser={currentUser}/>
         </>
     )
 }

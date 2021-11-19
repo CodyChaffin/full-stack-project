@@ -3,7 +3,7 @@ import AddVideoForm from "./AddVideoForm"
 import UserVideoCard from "./UserVideoCard"
 
 
-function UserProfile({currentUser}){
+function UserProfile({currentUser, setCurrentUser}){
 const [userVideos, setUserVideos] = useState(currentUser.videos)
     function deleteHandler(id){
         
@@ -29,15 +29,27 @@ const [userVideos, setUserVideos] = useState(currentUser.videos)
     },[userVideos])
     // const deleteItem = cartItems.filter(cart =>cart.id !== item.id)
     // setCartItems(deleteItem)
+    function logOut(){
+        fetch(`/logout/${currentUser.id}`,
+        {method: "DELETE",
+        credentials: 'include'})
+        .then(res=>{
+            if (res.ok) {
+                setCurrentUser(null)}
+        })
+    }
 
     
-    
+     
     // [usrVids, setVids] = useState(currentUser.vids)
     return (
         <>
-            <button>Log Out</button>
-            <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
-           {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))}
+            <Routes>
+                <Route path="/"> <button onClick={()=>logOut}>Log Out</button></Route>
+                <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
+                {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))},
+                
+            </Routes> 
         </>
     )
 }

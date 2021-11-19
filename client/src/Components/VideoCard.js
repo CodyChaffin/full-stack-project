@@ -1,6 +1,13 @@
+import { useEffect, useState } from "react"
+import AddCommentForm from "./AddCommentForm"
 
-function VideoCard({vid}){
+function VideoCard({vid, currentUser}){
     const embedId = vid.url
+    
+    const [vidCom, setVidCom]= useState(vid.comments)
+    
+
+  
     return (
         <div style={{textAlign: "center", padding: "50px"}}>
         <h1>{vid.title}</h1>
@@ -9,11 +16,9 @@ function VideoCard({vid}){
        <h3>Likes : {vid.likes}</h3>
         <h3>Views : {vid.veiws}</h3>
         <p style={{fontSize : 25, textAlign: "center"}}>{vid.description}</p>
+        {vid.comments.map(comment=><ul>{comment.remark} by {vid.user.name}  </ul>)}
         
-        <form>
-            <input type="text" placeholder="say something"></input>
-            
-        </form>
+        <AddCommentForm currentUser={currentUser} vid={vid} vidCom={vidCom} setVidCom={setVidCom} />
         </div>
     )
 }

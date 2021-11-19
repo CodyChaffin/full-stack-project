@@ -33,7 +33,7 @@ function App() {
         <Route path="/home" element={<MainPage
             setCurrentUser={setCurrentUser}
             currentUser={currentUser} />}/>
-        <Route path="/my-profile" element={ <UserProfile currentUser={currentUser}/>} />
+        <Route path="/my-profile" element={ <UserProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
       </Routes>
     </>
   )

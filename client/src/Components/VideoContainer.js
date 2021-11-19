@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import VideoCard from "./VideoCard"
 
 
-function VideoContainer(){
+function VideoContainer({currentUser}){
     const [videos, setVideos] = useState([])
+    
     
     useEffect(() => {
         fetch("/videos")
@@ -13,7 +14,7 @@ function VideoContainer(){
      
     return (
         <>
-        {videos.map(vid=>(<VideoCard vid = {vid}/>))}
+        {videos.map(vid=>(<VideoCard vid = {vid} currentUser={currentUser}/>))}
         </>
     )
 }
