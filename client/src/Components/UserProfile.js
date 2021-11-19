@@ -42,16 +42,16 @@ const [userVideos, setUserVideos] = useState(currentUser.videos)
     
      
     // [usrVids, setVids] = useState(currentUser.vids)
-    return (
-        <>
-            <Routes>
-                <Route path="/"> <button onClick={()=>logOut}>Log Out</button></Route>
-                <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
-                {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))},
+    // return (
+    //     <>
+    //         <Routes>
+    //             <Route path="/"> <button onClick={()=>logOut}>Log Out</button></Route>
+    //             <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
+    //             {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))},
                 
-            </Routes> 
-        </>
-    )
+    //         </Routes> 
+    //     </>
+    // )
 }
 // }setVids={setVids}
 export default UserProfile
