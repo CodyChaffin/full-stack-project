@@ -31,7 +31,7 @@ const handleSubmit = (e) => {
       }
     return (
 
-        
+        // <div class ="loginmain">
         <form onSubmit={handleSubmit}>
             <input type = "text" 
             placeholder = "Email" 
@@ -44,6 +44,7 @@ const handleSubmit = (e) => {
             onChange={(e)=>setPassword(e.target.value)} />
             <button>Log in</button>
         </form>
+        // </div>
     )
 }
 
