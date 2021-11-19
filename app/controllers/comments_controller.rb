@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     comments = Comment.all
     render json: comments, status: :ok
   end
-
+  
   # GET /tests/1
   # GET /tests/1.json
   # def show
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.create(comment_params)
     if comment.valid?
-      render json: comment.video, status: :created
+      render json: comment, status: :created
     else
       render json: {errors: "Some error here"}, status: :unprocessable_entity
     end

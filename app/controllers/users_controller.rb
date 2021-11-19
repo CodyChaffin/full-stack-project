@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /tests/1.json
   def show
     if current_user
-      session[:user_id] = user.id
+      # session[:user_id] = user.id
       render json: current_user, status: :ok
     else
       render json: {error: 'no active session'}, status: :unauthorized

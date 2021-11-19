@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :update, :destroy]
-  before_action :authorize_user, only: [:create, :update, :destroy]
+  # before_action :authorize_user, only: [:create, :update, :destroy]
 
   
           # GET /tests
@@ -15,7 +15,7 @@ class VideosController < ApplicationController
   def show
     video = Video.find_by(id: params[:id])
     if video
-      render json: video, serializer:VideodetailsSerializer
+      render json: video 
     else
       render json: {error: "Video not found" }, status: :not_found
     end
@@ -85,10 +85,10 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
   end
 
-  def authorize_user
-    user_can_modify = current_user.admin? || @video.user_id == current_user.id
-    render json: { error: "You don't have permission to perform that action" }, status: :forbidden unless user_can_modify
-  end
+  # def authorize_user
+  #   user_can_modify = current_user.admin? || @video.user_id == current_user.id
+  #   render json: { error: "You don't have permission to perform that action" }, status: :forbidden unless user_can_modify
+  # end
 
   def vid_upload
     params.permit(:user_id, :url, :title, :likes, :description, :veiws)

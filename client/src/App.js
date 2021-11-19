@@ -1,6 +1,8 @@
 import LoginSigninPage from "./Components/unauthorizedPage";
 import MainPage from "./Components/authorizedPage";
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -14,7 +16,6 @@ function App() {
         if (res.ok) {
           res.json().then((user) => {
             setCurrentUser(user)
-            // console.log(user)
             setAuthChecked(true)
           })
         } else {
@@ -26,19 +27,14 @@ function App() {
   if(!authChecked) { return <div></div>}
   return (
     <>
-    {/* // <Router> */}
-      {currentUser ? (
-          <MainPage
+     <Routes>
+     
+      <Route path="/" element={<LoginSigninPage setCurrentUser={setCurrentUser}/>} />
+        <Route path="/home" element={<MainPage
             setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
-          />
-        ) : (
-          <LoginSigninPage
-            setCurrentUser={setCurrentUser}
-          />
-        )
-      }
-    {/* // </Router> */}
+            currentUser={currentUser} />}/>
+        <Route path="/my-profile" element={ <UserProfile currentUser={currentUser}/>} />
+      </Routes>
     </>
   )
 }

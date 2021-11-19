@@ -1,12 +1,15 @@
 import VideoContainer from "./VideoContainer"
+import { useNavigate } from "react-router"
 
 function MainPage({currentUser}){
-
-
+    // function user() {
+    //     fetch(`/users/${currentUser.id}`)
+    // }
+    const navigate = useNavigate();
 
     return (
         <>
-        <h1 style={{position: "fixed"}}>{currentUser.name}</h1>
+        <button onClick={()=>navigate("/my-profile")}style={{position: "fixed"}}>{currentUser.name}</button>
         <VideoContainer/>
         </>
     )
