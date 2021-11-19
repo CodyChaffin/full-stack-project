@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import AddVideoForm from "./AddVideoForm"
+import { useNavigate } from "react-router"
 import UserVideoCard from "./UserVideoCard"
 
 
-function UserProfile({currentUser, setCurrentUser}){
-const [userVideos, setUserVideos] = useState(currentUser.videos)
+
+function UserProfile({currentUser}){
+    const [userVideos, setUserVideos] = useState(currentUser.videos)
+    const navigate = useNavigate();
+    // const history = useHistory()
     function deleteHandler(id){
         
 
@@ -27,31 +31,21 @@ const [userVideos, setUserVideos] = useState(currentUser.videos)
     useEffect(()=>{
         ;
     },[userVideos])
-    // const deleteItem = cartItems.filter(cart =>cart.id !== item.id)
-    // setCartItems(deleteItem)
-    function logOut(){
-        fetch(`/logout/${currentUser.id}`,
-        {method: "DELETE",
-        credentials: 'include'})
-        .then(res=>{
-            if (res.ok) {
-                setCurrentUser(null)}
-        })
-    }
-
+    
+    
     
      
     // [usrVids, setVids] = useState(currentUser.vids)
-    // return (
-    //     <>
-    //         <Routes>
-    //             <Route path="/"> <button onClick={()=>logOut}>Log Out</button></Route>
-    //             <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
-    //             {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))},
+    return (
+        <>
+           
+            <button onClick={()=>navigate('/')}>Log Out</button>
+            <AddVideoForm  currentUser= {currentUser} setUserVideos={setUserVideos} userVideos={userVideos}/>
+            {userVideos.map(video =>(<UserVideoCard  video = {video} deleteHandler={deleteHandler}/>))},
                 
-    //         </Routes> 
-    //     </>
-    // )
+           
+        </>
+    )
 }
 // }setVids={setVids}
 export default UserProfile

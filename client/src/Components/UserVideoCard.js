@@ -8,7 +8,8 @@ function UserVideoCard({video, deleteHandler}){
         
 
         fetch(`/comments/${id}`,{
-        method : "DELETE"}
+        method : "DELETE", credentials: 'include'}
+
         )
         
        
@@ -36,10 +37,8 @@ function UserVideoCard({video, deleteHandler}){
         <button style={{backgroundColor:"red"}} onClick={()=>deleteHandler(video.id)}>Delete</button>
         <p style={{fontSize : 25, textAlign: "center"}}>{video.description}</p>
         
-        {video.comments.map(comment=><ul>{comment.remark}  <button onClick={()=>handleDelete(comment.id)}style={{backgroundColor: 'orange'}}>delete</button></ul>,)}
-        <form>
-            <input type="text"/>
-        </form>
+        {userComments.map(comment=><ul>{comment.remark}  <button onClick={()=>handleDelete(comment.id)}style={{backgroundColor: 'orange'}}>delete</button></ul>,)}
+        
         </div>
     )
 }

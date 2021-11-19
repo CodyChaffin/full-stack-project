@@ -3,10 +3,25 @@ import MainPage from "./Components/authorizedPage";
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import UserProfile from "./Components/UserProfile";
+import { useNavigate } from "react-router"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [authChecked, setAuthChecked] = useState(false)
+  const navigate = useNavigate();
+
+//   const handleLogout = ()=>{
+    
+//     fetch(`/api/logout/${currentUser.id}`,
+//     {method: "DELETE",
+//     credentials: 'include'})
+//     .then(()=>{
+//             setCurrentUser(null)
+            
+//             navigate("/")
+//     })
+
+// }
 
   useEffect(() => {
     fetch('/me', {
@@ -28,12 +43,13 @@ function App() {
   return (
     <>
      <Routes>
-     
+      
       <Route path="/" element={<LoginSigninPage setCurrentUser={setCurrentUser}/>} />
         <Route path="/home" element={<MainPage
             setCurrentUser={setCurrentUser}
             currentUser={currentUser} />}/>
-        <Route path="/my-profile" element={ <UserProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+        <Route path="/my-profile" element={ <UserProfile  currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+        
       </Routes>
     </>
   )

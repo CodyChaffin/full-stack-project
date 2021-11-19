@@ -18,9 +18,10 @@ function VideoCard({vid, currentUser}){
         <p style={{fontSize : 25, textAlign: "center"}}>{vid.description}</p>
         </div>
         <div className = "comCard">
-        {vid.comments.map(comment=><ul>{comment.remark} by {vid.user.name}  </ul>)}
+            <AddCommentForm currentUser={currentUser} vid={vid} vidCom={vidCom} setVidCom={setVidCom} />
+        <ul style={{listStyle: "none"}}>{vidCom.map(comment=><li>{comment.remark} by {vid.user.name}  </li>)}</ul>
         
-        <AddCommentForm currentUser={currentUser} vid={vid} vidCom={vidCom} setVidCom={setVidCom} />
+        
         </div>
         </div>
     )

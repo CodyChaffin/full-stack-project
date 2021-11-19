@@ -6,6 +6,7 @@ function MainPage({currentUser}){
     //     fetch(`/users/${currentUser.id}`)
     // }
     const navigate = useNavigate();
+    
 
     return (
         <>

@@ -23,6 +23,7 @@ function AddCommentForm({currentUser, vid, vidCom, setVidCom}){
         .then(newCom => setVidCom([newCom, ...vidCom]))
         
     }
+    
     return(
         <form onSubmit={submitHandler}>
             <input type="text" placeholder="say something" value={remark} onChange={(e)=>setRemark(e.target.value)}></input>
