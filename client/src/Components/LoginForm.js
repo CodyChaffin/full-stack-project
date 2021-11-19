@@ -42,7 +42,7 @@ const handleSubmit = (e) => {
             placeholder = "Password" 
             value = {password} 
             onChange={(e)=>setPassword(e.target.value)} />
-            <button>Log In</button>
+            <button>Log in</button>
         </form>
     )
 }

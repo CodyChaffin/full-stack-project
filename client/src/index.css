@@ -58,4 +58,17 @@ body {
     margin-right: 300px
 }
 
+/* .loginPadding {
+    background-color: blue;
+    margin-top: 500px;
+    margin-bottom: 200px;
+} */
+
+.logo {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px
+    }
 
