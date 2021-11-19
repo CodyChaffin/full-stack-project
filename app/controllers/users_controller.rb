@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # skip_before_action :confirm_authentication
-  before_action :authorize_user, only: [ :create, :update, :destroy]
+  before_action :authorize_user, only: [:update, :destroy]
 
   # GET /tests/1
   # GET /tests/1.json

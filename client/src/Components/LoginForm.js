@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function LoginForm({setCurrentUser}){
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
-console.log(setCurrentUser)
+
 let navigate = useNavigate();
     
 const handleSubmit = (e) => {
